@@ -7,7 +7,10 @@ Understanding Regression Coefficients with One Predictor
 > the two groups.
 
 Suppose a regression of Salary on whether the employee is class Faculty
-(1) or Staff (0).
+(1) or Staff
+(0):
+
+![](http://www.sciweavers.org/tex2img.php?eq=%20Salary%20%3D%20%20%5Cbeta_0%20%2B%20%5Cbeta_1%20IsFaculty%20%2B%20e&bc=White&fc=Black&im=png&fs=12&ff=modern&edit=0)
 
 ``` r
 library(package = data.table)
@@ -31,7 +34,10 @@ The intercept represents the predicted value when all predictors are 0
 (i.e. Staff). The regression coefficient tells us that, in our sample,
 Faculty make $8k more in Salary on average than Staff.
 
-An unbiased linear model intersects the average of each sub-population:
+An unbiased linear model intersects the average of each
+sub-population:
+
+![](http://www.sciweavers.org/tex2img.php?eq=%20%5Cwidehat%7BSalary%7D%20%3D%20%2052%2C387%20%2B%208%2C000%20%5Ctimes%20IsFaculty&bc=White&fc=Black&im=png&fs=12&ff=modern&edit=0)
 
 ``` r
 ggplot(data = salaries, aes(x = IsFaculty, y = Salary)) + 
@@ -51,7 +57,10 @@ or
 > The regression coefficient is the slope of the prediction line at any
 > level.
 
-Suppose a regression of Salary on Age in continuous years.
+Suppose a regression of Salary on Age in continuous
+years:
+
+![](http://www.sciweavers.org/tex2img.php?eq=Salary%20%3D%20%20%5Cbeta_0%20%2B%20%5Cbeta_1%20Age%20%2B%20e&bc=White&fc=Black&im=png&fs=12&ff=modern&edit=0)
 
 ``` r
 set.seed(7)
@@ -76,11 +85,11 @@ average than employees one year their junior; or you could say that an
 employee would make $10,190 more Salary on average if they were a decade
 older.
 
-An unbiased linear model intersects the average of each sub-population:
+![](http://www.sciweavers.org/tex2img.php?eq=%20%5Cwidehat%7BSalary%7D%20%3D%20%209%2C145%20%2B%201%2C019%20%5Ctimes%20Age&bc=White&fc=Black&im=png&fs=12&ff=modern&edit=0)
 
 ``` r
 ggplot(data = salaries, aes(x = Age, y = Salary)) +
-  geom_point(alpha = .25, aes(color = Age), show.legend = FALSE) +
+  geom_point(alpha = .25) +
   geom_line(aes(x = Age, y = lm.salaries$fitted.values))
 ```
 
