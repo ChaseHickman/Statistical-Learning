@@ -9,7 +9,7 @@ output: github_document
 
 Suppose a regression of Salary on whether the employee is class Faculty (1) or Staff (0):
 
-![](R_Markdown_Files\OPTex1.png)
+![](One_Predictor_files\OPTex1.png)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(package = data.table)
@@ -30,7 +30,7 @@ The intercept represents the predicted value when all predictors are 0 (i.e. Sta
 
 An unbiased linear model intersects the average of each sub-population:
 
-![](R_Markdown_Files\OPTex2.png)
+![](One_Predictor_files\OPTex2.png)
 
 ```{r}
 ggplot(data = salaries, aes(x = IsFaculty, y = Salary)) + 
@@ -48,7 +48,7 @@ or
 
 Suppose a regression of Salary on Age in continuous years:
 
-![](R_Markdown_Files\OPTex3.png)
+![](One_Predictor_files\OPTex3.png)
 
 ```{r}
 set.seed(7)
@@ -66,7 +66,7 @@ lm.salaries$coefficients %>% round(0)
 The intercept represents the predicted value when all predictors are 0 (i.e. Salary at birth--not very meaningful). The regression coefficient tells us that, in our sample, employees make $1,019 more Salary on average than employees one year their junior; or you could say that an employee would make \$10,190 more Salary on
 average if they were a decade older.  
 
-![](R_Markdown_Files\OPTex4.png)
+![](One_Predictor_files\OPTex4.png)
 ```{r}
 ggplot(data = salaries, aes(x = Age, y = Salary)) +
   geom_point(alpha = .25) +

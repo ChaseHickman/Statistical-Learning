@@ -9,7 +9,7 @@ Understanding Regression Coefficients with One Predictor
 Suppose a regression of Salary on whether the employee is class Faculty
 (1) or Staff (0):
 
-![](R_Markdown_Files\\OPTex1.png)
+![](One_Predictor_files\\OPTex1.png)
 
 ``` r
 library(package = data.table)
@@ -35,7 +35,7 @@ Faculty make $8k more in Salary on average than Staff.
 
 An unbiased linear model intersects the average of each sub-population:
 
-![](R_Markdown_Files\\OPTex2.png)
+![](One_Predictor_files\\OPTex2.png)
 
 ``` r
 ggplot(data = salaries, aes(x = IsFaculty, y = Salary)) + 
@@ -57,7 +57,7 @@ or
 
 Suppose a regression of Salary on Age in continuous years:
 
-![](R_Markdown_Files\\OPTex3.png)
+![](One_Predictor_files\\OPTex3.png)
 
 ``` r
 set.seed(7)
@@ -82,7 +82,7 @@ average than employees one year their junior; or you could say that an
 employee would make $10,190 more Salary on average if they were a decade
 older.
 
-![](R_Markdown_Files\\OPTex4.png)
+![](One_Predictor_files\\OPTex4.png)
 
 ``` r
 ggplot(data = salaries, aes(x = Age, y = Salary)) +
