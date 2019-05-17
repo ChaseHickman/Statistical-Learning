@@ -1,0 +1,51 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r message=FALSE, warning=FALSE}
+library(data.table)
+library(tidyverse)
+
+set.seed(7)
+salaries <- data.table(IsFaculty = rep(x = c(0,1), each = 250),
+                       Age = sample(x = 18:69, 
+                                    size = 500, 
+                                    replace = TRUE)) %>%
+  mutate(Salary = (Age * 1000 + rnorm(n = 500, 
+                                      mean = 10000, 
+                                      sd = 10000)) +
+                  (IsFaculty * 10000) + 
+                  (IsFaculty*Age*1000))
+
+lm.salaries <- lm(formula = Salary ~ ., data = salaries)
+
+lm.salaries$coefficients
+```
+
+```{r}
+ggplot(data = salaries, aes(x = Age, y = Salary)) + 
+  geom_point(alpha = .25) + 
+  geom_line(aes(x = Age, 
+                y = lm.salaries$fitted.values, 
+                group = IsFaculty, 
+                color = IsFaculty))
+```
+
+```{r}
+
+lm.salaries.interactions <- lm(formula = Salary ~ . + Age*IsFaculty, 
+                               data = salaries)
+
+lm.salaries.interactions$coefficients
+```
+
+
+```{r}
+ggplot(data = salaries, aes(x = Age, y = Salary)) + 
+  geom_point(alpha = .25) + 
+  geom_line(aes(x = Age, 
+                y = lm.salaries.interactions$fitted.values, 
+                group = IsFaculty, 
+                color = IsFaculty))
+```
