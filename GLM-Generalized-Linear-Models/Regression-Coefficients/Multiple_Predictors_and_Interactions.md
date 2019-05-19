@@ -6,17 +6,22 @@ Interactions
 
 ##### Predictive
 
-> The response, on average, comparing **two individuals** *holding all
-> other predictors constant*. This is not always logistically possible
-> when predictors co-vary or interact with each other.
+> Interpret the coefficient as differences between two individual’s
+> *holding all other predictors constant*. This is not always
+> logistically possible when predictors co-vary or interact with each
+> other.
 
 ##### Counterfactual
 
-> The response **associated** with a 1 unit change to an
-> **individual’s** predictor. This suggests causality and may be
-> inappropriate.
+> The response **associated** with a change to an **individual**. This
+> suggests causality and may be inappropriate.
 
 ### Multiple Predictors
+
+Suppose a regression of Salary on Age and whether the employees is
+Faculty (1) vs Staff (0):
+
+![](Multiple_Predictors_and_Interactions_files/MP_Tex1.png)
 
 ``` r
 library(data.table)
@@ -35,11 +40,19 @@ salaries <- data.table(IsFaculty = rep(x = c(0,1), each = 250),
 
 lm.salaries <- lm(formula = Salary ~ ., data = salaries)
 
-lm.salaries$coefficients
+lm.salaries$coefficients %>% round(0)
 ```
 
     ## (Intercept)   IsFaculty         Age 
-    ##  -14167.581   53904.575    1534.302
+    ##      -14168       53905        1534
+
+The predictive interpretation of IsFaculty is that a Faculty member
+makes $53.9k more, on average, than a staff member of the same Age.
+
+The counterfactual interpretation of Age is that an employee, regardless
+of if they are staff or faculty, will make $1.5k more Salary each year.
+
+![](Multiple_Predictors_and_Interactions_files/MP_Tex2.png)
 
 ``` r
 ggplot(data = salaries, aes(x = Age, y = Salary)) + 
@@ -52,15 +65,36 @@ ggplot(data = salaries, aes(x = Age, y = Salary)) +
 
 ![](Multiple_Predictors_and_Interactions_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+### Interactions of Predictors
+
+Note how, in the last figure, the slope of coefficient Age is forced to
+be the same accross sub-group IsFaculty even though the fit appears
+aggressive for Staff and conservative for Faculty.
+
+Including interactions (the product of two variables) is a way to fit
+the model to different subsets of the data.
+
+Suppose a regression of Salary on Age, whether the employee is Faculty
+(1) or Staff (0), and their interactions:
+
+![](Multiple_Predictors_and_Interactions_files/MP_Tex3.png)
+
 ``` r
 lm.salaries.interactions <- lm(formula = Salary ~ . + Age*IsFaculty, 
                                data = salaries)
 
-lm.salaries.interactions$coefficients
+lm.salaries.interactions$coefficients %>% round(0)
 ```
 
     ##   (Intercept)     IsFaculty           Age IsFaculty:Age 
-    ##      7242.356     13564.219      1059.917       920.857
+    ##          7242         13564          1060           921
+
+The interaction coefficient represents the difference in regression
+slopes between Faculty and Staff (i.e. predicted Salary increases $921
+more for Faculty each year in Age compared to Staff). Below, the slope
+of the regression now fits each sub-population independently.
+
+![](Multiple_Predictors_and_Interactions_files/MP_Tex4.png)
 
 ``` r
 ggplot(data = salaries, aes(x = Age, y = Salary)) + 
