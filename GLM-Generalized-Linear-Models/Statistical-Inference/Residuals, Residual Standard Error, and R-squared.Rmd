@@ -7,7 +7,7 @@ output: github_document
 
 > The difference between the observed data-point and the fitted value.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 lm.iris <- lm(formula = Sepal.Length ~ Petal.Length, data = iris)

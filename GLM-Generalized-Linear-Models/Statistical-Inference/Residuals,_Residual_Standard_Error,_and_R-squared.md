@@ -3,8 +3,21 @@ Residuals, Residual Standard Error, and R-squared
 
 ### Residuals
 
-> The difference between the observed data-point and the fitted
-value.
+> The difference between the observed data-point and the fitted value.
+
+``` r
+library(tidyverse)
+
+lm.iris <- lm(formula = Sepal.Length ~ Petal.Length, data = iris)
+
+ggplot(data = iris) +
+  geom_point(aes(x = Petal.Length, y = Sepal.Length, color = Species)) +
+  geom_line(aes(x = Petal.Length, y = lm.iris$fitted.values)) +
+  geom_segment(aes(x = Petal.Length, 
+                   y = lm.iris$fitted.values, 
+                   xend = Petal.Length, 
+                   yend = Sepal.Length ), color= 'grey')
+```
 
 ![](Residuals,_Residual_Standard_Error,_and_R-squared_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
