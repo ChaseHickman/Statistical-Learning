@@ -80,6 +80,6 @@ ggplot() +
 Degrees of freedom in the model are the number of data-points minus the
 number of estimated coefficients.
 
-E.g. if I have 7 hats and wear a different had each day of the week, I
+E.g. if I have 7 hats and wear a different hat each day of the week, I
 have six degrees of freedom because, on the final day, I have no choice
 in which hat to wear.
